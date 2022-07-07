@@ -30,7 +30,7 @@ int main(void)
 		max = n;
 	}
 
-	printf("%lu\n", max);
+	printf("%lu\n", n);
 
 	return (0);
 }
