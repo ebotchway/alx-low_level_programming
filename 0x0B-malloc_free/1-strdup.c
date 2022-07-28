@@ -2,44 +2,33 @@
 #include <stdlib.h>
 
 /**
- * argstostr - Concatenates all arguments of the program into a string;
- *             arguments are separated by a new line in the string.
- * @ac: The number of arguments passed to the program.
- * @av: An array of pointers to the arguments.
+ * _strdup - Returns a pointer to a newly-allocated space in memory
+ *           containing a copy of the string given as parameter.
+ * @str: The string to be copied.
  *
- * Return: If ac == 0, av == NULL, or the function fails - NULL.
- *         Otherwise - a pointer to the new string.
+ * Return: If str == NULL or insufficient memory is available - NULL.
+ *         Otherwise - a pointer to the duplicated string.
  */
-char *argstostr(int ac, char **av)
+char *_strdup(char *str)
 {
-	char *str;
-	int arg, byte, index, size = ac;
-
-	if (ac == 0 || av == NULL)
-		return (NULL);
-
-	for (arg = 0; arg < ac; arg++)
-	{
-		for (byte = 0; av[arg][byte]; byte++)
-			size++;
-	}
-
-	str = malloc(sizeof(char) * size + 1);
+	char *duplicate;
+	int index, len = 0;
 
 	if (str == NULL)
 		return (NULL);
 
-	index = 0;
+	for (index = 0; str[index]; index++)
+		len++;
 
-	for (arg = 0; arg < ac; arg++)
-	{
-		for (byte = 0; av[arg][byte]; byte++)
-			str[index++] = av[arg][byte];
+	duplicate = malloc(sizeof(char) * (len + 1));
 
-		str[index++] = '\n';
-	}
+	if (duplicate == NULL)
+		return (NULL);
 
-	str[size] = '\0';
+	for (index = 0; str[index]; index++)
+		duplicate[index] = str[index];
 
-	return (str);
+	duplicate[len] = '\0';
+
+	return (duplicate);
 }
